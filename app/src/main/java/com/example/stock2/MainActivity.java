@@ -16,15 +16,16 @@ import android.graphics.Color;
 public class MainActivity extends AppCompatActivity {
 
     private API api;
+    private TableLayout table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         api = API.getInstance();
+        table = findViewById(R.id.table);
 
         Button searchButton = findViewById(R.id.search_button);
-        TableLayout table = findViewById(R.id.table);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,10 +33,9 @@ public class MainActivity extends AppCompatActivity {
                 EditText search = findViewById(R.id.stock_search_edittext);
                 String symbol = search.getText().toString();
                 StockData stockData = api.getStockData(symbol);
-                if(stockData.getPrice() == 0)
-                {
+                if (stockData.getPrice() == 0) {
                     System.out.println("Invalid name");
-                    return ;
+                    return;
                 }
 
                 TableRow row = new TableRow(MainActivity.this);
@@ -55,21 +55,32 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView stockChange = new TextView(MainActivity.this);
                 stockChange.setLayoutParams(layoutParams);
-                if(stockData.getChange()>0)
+                if (stockData.getChange() > 0)
                     stockChange.setTextColor(Color.GREEN);
-                if(stockData.getChange()<0)
+                if (stockData.getChange() < 0)
                     stockChange.setTextColor(Color.RED);
-
                 stockChange.setText(String.valueOf(stockData.getChange()));
+
+                Button removeButton = new Button(MainActivity.this);
+                removeButton.setLayoutParams(layoutParams);
+                removeButton.setText("Remove");
+                removeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        table.removeView(row);
+                    }
+                });
 
                 row.addView(stockSymbol);
                 row.addView(stockPrice);
                 row.addView(stockChange);
+                row.addView(removeButton);
 
                 table.addView(row);
-                // Clear the search line text
+
                 search.setText("");
             }
         });
     }
 }
+

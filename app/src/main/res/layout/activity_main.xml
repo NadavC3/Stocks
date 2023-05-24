@@ -49,12 +49,14 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/stock_symbol_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Stock"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/stock_price_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price"
@@ -62,13 +64,17 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/stock_change_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Daily Change"
                 android:layout_marginStart="16dp"
                 android:textStyle="bold" />
 
+
+
         </TableRow>
+
 
     </TableLayout>
 
