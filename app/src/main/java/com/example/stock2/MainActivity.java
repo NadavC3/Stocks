@@ -140,5 +140,3 @@ public class MainActivity extends AppCompatActivity {
         table.addView(row);
     }
 }
-
-
